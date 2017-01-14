@@ -4,7 +4,7 @@ This current-trending music app allows a user to center their search for the bes
 
 # Application Screenshot:
 
-![Alt text](/relative/path/to/musicality.png?raw=true "Optional Title")
+![Alt text](/relative/path/to/musicality.png?raw=true "Musicality")
 
 
 Collaborators:
