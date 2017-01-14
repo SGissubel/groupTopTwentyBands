@@ -4,7 +4,7 @@ This current-trending music app allows a user to center their search for the bes
 
 
 
-Group: Orange Iguanas 
+Collaborators:
 Steve Gissubel
 John Bruno
 Hero Khemchandani
