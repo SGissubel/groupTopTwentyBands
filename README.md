@@ -6,6 +6,13 @@ This current-trending music app allows a user to center their search for the bes
 
 ![Alt text](/relative/path/to/musicality.png?raw=true "Musicality")
 
+# Application Screenshot:
+
+HTML
+CSS
+JavaScript
+Jquery
+
 
 Collaborators:
 Steve Gissubel
