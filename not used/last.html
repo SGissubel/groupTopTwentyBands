@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+<head>
+   <title>Last.fm</title>
+</head>
+<body>
+
+
+
+
+ 
+    <div> Last.fm RSS</div>
+    <script src="http://code.jquery.com/jquery.js"></script>
+    <script type="text/javascript">
+$(document).ready(function() {
+   
+
+	var lastTopArt = {
+    //last.fm url for top artists
+    	queryURL: "http://ws.audioscrobbler.com/2.0/?method=chart.gettopartists&api_key=c7ca1cd620610095f4cc0675ec49307c&format=json",
+        
+        runpage: function(){
+        //ajax pull for lastfm top artists...currently 
+        $.ajax ({
+            url: this.queryURL,
+            method:'GET'
+            }).done(function(result){
+                $('body').text(JSON.stringify(result));
+     alert ("hi");
+        }).fail(function(err){
+        	console.log(err);
+        	alert('Sorry. Something Has Gone Wrong...Probably not our fault though.');
+        })//end ajax & (fail function)
+     	
+     	} //end runpage function
+     
+     }//end lastFmSearch object
+
+lastTopArt.runpage();
+
+ })//end document.ready 
+    </script>  
+</body>
+</html>

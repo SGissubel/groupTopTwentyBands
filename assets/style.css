@@ -1,0 +1,220 @@
+@font-face {
+       font-family: 'paralinesregular';
+       src: url('paralines-regular-webfont.woff2') format('woff2'),
+            url('paralines-regular-webfont.woff') format('woff');
+       font-weight: normal;
+       font-style: normal;
+   }
+   .top20 {
+    line-height: initial;
+   }
+   .containerTwo {
+    margin: 1em 1em;
+/*    background-color: rgb(42,194,188);
+*/    background-color: rgb(141,194,188);
+    padding-top: 7px;
+   }
+   .the{
+    margin-left: 2em;
+    font-family: 'Molle', cursive;
+    font-size: 40px;
+
+   }
+    .container {
+      margin: 0 5em 0 5em;
+    }
+    .top {
+      text-align: center;
+      padding-bottom: 20px;
+      font-family: 'Lato', sans-serif;
+    }
+
+     #storage {display:none;}
+    
+    h1 {
+      color: white;
+      font-family: 'paralinesregular';
+             font-weight: normal;
+       font-style: normal;
+      font-size: 7em;
+      margin-bottom: 0;
+      margin-top: 0;
+    }
+
+
+/*begin modal css*/
+    #myModal {
+      border-radius: 30px;
+    }
+    #header{
+      color: black;
+    }
+    .modal {
+      display: none;
+      position: fixed;
+      z-index: 1;
+      padding-top: 100px;
+      left: 0;
+      top: 0;
+      width: 100%;
+      height: 100%;
+      overflow: auto;
+      background-color: rgb(0,0,0);
+      background-color: rgba(0, 0, 0,0.4);
+    }
+
+
+    .modal-content {
+        position: relative;
+        background-color: rgb(141,194,188);
+        margin: auto;
+        padding: 0;
+        border: 1px solid #888;
+        width: 37%;
+        box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2),0 6px 20px 0 rgba(0,0,0,0.19);
+        -webkit-animation-name: animetop;
+        -webkit-animation-duration: 0.4s;
+        animation-name: animatetop;
+        animation-duration: 0.4s;
+    }
+    @-webkit-keyframes animatetop {
+      from {top:-300px; opacity:0}
+      to {top:0; opacity:1;}
+    }
+    @keyframes animatetop {
+      from {top:-300px; opaccity:0}
+      to {top:0; opacity:1;}
+    }
+    .close: hover,
+    .close: focus {
+      color: #000;
+      text-decoration: none;
+      cursor: pointer;
+    }
+    .modal-header {
+      padding: 2px 16px;
+      background-color: rgb(141,194,188);
+      color: white;
+    }
+    .modal-body {padding: 2px 16px;}
+    .modal-footer {
+      padding: 2px 16px;
+      background-color: black;
+      color:white;
+    }
+    .pOne{
+      font-family: 'Lato', sans-serif;
+
+    }
+    .myaudio {
+      width: 390px;
+    }
+/*end modal css*/
+
+
+    body {
+      margin: 0;
+      background-color: #E0E0E0;
+      /*background-color: rgb(70, 96, 108)*/
+    }
+    header {
+     background-color: #d51007;
+/*     background-color: #1584b0;
+*/      margin: 0 5em;
+      margin-right: 33em;
+      display: flex;
+/*      padding: .4em; 
+      text-align: center;*/
+    }
+    .of {
+      font-size: 1.4em;
+      padding-top: 6em;
+      margin-bottom: 0;
+      font-family: 'Molle', cursive;
+ 
+    }
+
+      .button {
+        border: 0;
+        font-family: 'Lato', sans-serif;
+        color: white;
+        background-color: black;
+/*      background-color:  rgb(237,159,25)*/
+        border-radius: 1px;
+        width: 125px;
+        margin-left: 10px;
+        margin-top: 13em;
+      }
+  
+     
+
+    .bandImg {
+      float: left;
+      overflow: auto;
+/*      position: relative;
+*/    margin: 0 1em 12em 1em;
+      color: #fff;
+      padding-right: 10em;
+    }
+
+    .bandClass {
+      position: absolute;
+    }
+
+    .bandInfoAppearsHere {
+      border: solid;
+      margin-bottom: 38px;
+      padding-bottom: 8px;
+      padding-left: 18px;
+      margin-top: 17px;
+    }    
+
+    #bandInfoAppearsHere {
+      float:left;
+    }
+    .reload {
+      color: white;
+      background-color: #d51007;
+      text-align: right;
+      font-family: "Courier New";
+      font-size: 1.4em;
+      margin-bottom: 1.5em;
+      margin-left: 80px;
+      padding-right: 2em;
+      margin-top: 0;
+
+    }
+    .bandPlayClass {
+      border: 0;
+      background-color: black;
+      color: white;
+      margin-right: 2px;
+    }
+/*    .reload:hover{
+
+    }*/
+    .resultsVia{
+      padding-right: 2em;
+      padding-top: 2em;
+      color: #d51007;
+      font-family: 'Lato', sans-serif;
+      float: right;
+    }
+    .last {
+      width: 91px;
+      padding-top: 6px;
+    }
+
+/*         <style media="screen">
+*/      .img {
+        width: 125px;
+        height: 125px;
+        margin-left: 10px;
+        margin-top: 10px;
+        border-radius: 8px;
+      }
+      img:nth-child(odd){
+        float: right;
+      }
+/*    </style>
+*/

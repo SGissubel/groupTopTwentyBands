@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title></title>
+</head>
+<body>
+
+ <script src="https://code.jquery.com/jquery.js"></script>
+
+<script type="text/javascript">
+	class Blipfm {
+    const API_URL = 'http://api.blip.fm';
+
+    const PAGE_SIZE = 20;
+
+    const FORMAT_OUTPUT_PHP = 'php';
+    const FORMAT_OUTPUT_XML = 'xml';
+    const FORMAT_OUTPUT_JSON = 'json';
+
+    private $api_key;
+    private $secret_key;
+
+    private $username;
+    private $appKey;
+    private $result;
+
+    public function __construct ($api_key, $secret_key)
+    {
+        $this->api_key = $api_key;
+        $this->secret_key = $secret_key;
+
+        if(! Crypt_HMAC) require_once ('Crypt/HMAC.php');
+        $this->hasher =& new Crypt_HMAC($this->secret_key, 'sha1');
+    }
+
+    public function setCredentials ($username, $appKey)
+    {
+        $this->username = $username;
+        $this->password = $appKey;
+    }
+
+    public function blip_delete ($id)
+    {
+        $this->result = $this->call("/blip/delete", compact("id"), 'POST');
+        return $this->result['collection']['Blip'];
+    }
+
+    public function blip_getBlipById ($id)
+    {
+        $this->result = $this->call("/blip/getById", compact("id"));
+        return $this->result['collection']['Blip'];
+    }
+
+    public function blip_getPublic ($offset = 0, $limit = self::PAGE_SIZE)
+    {
+        $this->result = $this->call("/blip/getPublic", compact("offset", "limit"));
+        return $this->result['collection']['Blip'];
+    }
+
+    public function blip_getUserHome ($offset = 0, $limit = self::PAGE_SIZE)
+    {
+        $this->result = $this->call("/blip/getUserHome", compact("offset", "limit"));
+        return $this->result['collection']['Blip'];
+    }
+
+    public function blip_getUserPlaylist ($username, $offset = 0, $limit = self::PAGE_SIZE)
+    {
+        $this->result = $this->call("/blip/getUserPlaylist", compact("username", "offset", "limit"));
+        return $this->result['collection']['Blip'];
+    }
+
+    public function blip_getUserProfile ($username, $offset = 0, $limit = self::PAGE_SIZE)
+    {
+        $this->result = $this->call("/blip/getUserProfile", compact("username", "offset", "limit"));
+        return $this->result['collection']['Blip'];
+    }
+
+    public function blip_getUserReplies ($username)
+    {
+        $this->result = $this->call("/blip/getUserReplies", compact("username"));
+        return $this->result['collection']['Blip'];
+    }
+
+    public function blip_ping ($ts, $station = 'public', $offset = 0, $limit = self::PAGE_SIZE)
+    {
+        $this->result = $this->call("/blip/getUserProfile", compact("ts", "station", "offset", "limit"));
+        return $this->result['collection']['Blip'];
+    }
+
+    public function blip_post ($song, $message)
+    {
+        $artist = $song['artist'];
+        $title = $song['title'];
+        $url = $song['location'];
+        $blipType = $song['type'];
+        $this->result = $this->call("/blip/post", compact("artist", "title", "url", "message", "blipType"), 'POST');
+        return $this->result['blip'];
+    }
+
+    public function search_findSongs ($searchTerm)
+    {
+        $this->result = $this->call("/search/findSongs", compact("searchTerm"));
+        return $this->result['collection']['Song'];
+    }
+
+    public function user_getByUsername ($username)
+    {
+        $this->result = $this->call("/user/getByUsername", compact("username"));
+        return $this->result['collection']['User'];
+    }
+
+    public function user_getFavoriteDJs ($username, $offset = 0, $limit = self::PAGE_SIZE)
+    {
+        $this->result = $this->call("/user/getFavoriteDJs", compact("username", "offset", "limit"));
+        return $this->result['collection']['User'];
+    }
+
+    public function user_getListeners ($username, $offset = 0, $limit = self::PAGE_SIZE)
+    {
+        $this->result = $this->call("/user/getListeners", compact("username", "offset", "limit"));
+        return $this->result['collection']['User'];
+    }
+
+    public function user_getStats ($username)
+    {
+        $this->result = $this->call("/user/getStats", compact("username"));
+        return $this->result['stats'];
+    }
+
+    public function generateSignature ($params, $method = 'GET')
+    {
+        $strToSign = $method . "\n" . $params['timestamp'] . "\n" . $params['nonce'];
+        return $this->hex2b64($this->hasher->hash($strToSign));
+    }
+
+    public function verifySignature ($params, $method, $expected_sig) {
+        return self::generateSignature ($params, $method) == $expected_sig;
+    }
+
+    private function hex2b64 ($str)
+    {
+        $raw = '';
+        for ($i=0; $i < strlen($str); $i+=2) {
+            $raw .= chr(hexdec(substr($str, $i, 2)));
+        }
+        return base64_encode($raw);
+    }
+
+    private function getNonce ()
+    {
+        return sprintf("%08x", mt_rand());
+    }
+
+    public function call ($function, $parameters = array(), $method = 'GET', $format = self::FORMAT_OUTPUT_PHP)
+    {
+        foreach($parameters as $key => $value) {
+            if(is_array($value)) {
+                $parameters[$key] = implode(',', $value);
+            }
+        }
+
+        $parameters['apiKey'] = $this->api_key;
+        $parameters['timestamp'] = time();
+        $parameters['nonce'] = $this->getNonce();
+
+        $parameters['signature'] = $this->generateSignature ($parameters, $method);
+
+        $ch = curl_init();
+        $url = self::API_URL ."{$function}.{$format}";
+        switch($method) {
+        case 'GET':
+            $url .= "?" . http_build_query($parameters);
+            break;
+        case 'POST':
+            curl_setopt($ch, CURLOPT_POST, 1);
+            curl_setopt($ch, CURLOPT_POSTFIELDS, http_build_query($parameters));
+            break;
+        }
+        curl_setopt($ch, CURLOPT_CONNECTTIMEOUT, 10);
+        curl_setopt($ch, CURLOPT_TIMEOUT, 20);
+        curl_setopt($ch, CURLOPT_URL, $url);
+        if($this->username && $this->password) {
+            curl_setopt($ch, CURLOPT_HTTPAUTH, CURLAUTH_DIGEST);
+            curl_setopt($ch, CURLOPT_USERPWD, "{$this->username}:{$this->password}");
+        }
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+        $rawResult = curl_exec($ch);
+        $info = curl_getinfo($ch);
+        if($info['http_code'] != 200) {
+            $e = new BlipException("Blip service returned error code {$info['http_code']}.", $info['http_code']);
+            $e->setFormat ($format);
+            //$e->setResult ($rawResult);
+
+            throw $e;
+        }
+        curl_close($ch);
+
+        if(self::FORMAT_OUTPUT_PHP == $format)
+        {
+            $result = unserialize($rawResult);
+            if($result === false) {
+                throw new BlipException("Unable to parse data returned from Blip: $rawResult");
+            }
+            $rtn = $result['result'];
+        }
+        else
+        {
+            $rtn = $rawResult;
+        }
+
+        return $rtn;
+    }
+}
+
+class BlipException extends Exception {
+    protected $result;
+    protected $format;
+
+    public function setFormat ($format)
+    {
+        $this->format = $format;
+    }
+
+    public function getFormat ()
+    {
+        return $this->format;
+    }
+
+    public function setResult ($result)
+    {
+        $this->result = $result;
+    }
+
+    public function getResult ()
+    {
+        return $this->result;
+    }
+}
+</script>
+</body>
+</html>
