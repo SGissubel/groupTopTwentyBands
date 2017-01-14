@@ -4,7 +4,8 @@ This current-trending music app allows a user to center their search for the bes
 
 # Application Screenshot:
 
-![Alt text](github.com:SGissubel/groupTopTwentyBands.git/musicality.png?raw=true "Musicality")
+![Alt text](/../github.com:SGissubel/groupTopTwentyBands.git/musicality.png?raw=true "Musicality")
+![Alt text](/../<branch name>/path/to/image.png?raw=true "Optional Title")
 
 # Application Screenshot:
 
