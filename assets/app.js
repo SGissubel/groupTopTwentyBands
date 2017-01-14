@@ -6,7 +6,7 @@
   //     //modal btn
   // var mbtn = $("#myBtn")                    
   // console.log(moment().format(mm/dd/yy));
-  var queryURL = "http://ws.audioscrobbler.com/2.0/?method=chart.gettopartists&limit=20&api_key=c7ca1cd620610095f4cc0675ec49307c&format=json"
+  var queryURL = "https://ws.audioscrobbler.com/2.0/?method=chart.gettopartists&limit=20&api_key=c7ca1cd620610095f4cc0675ec49307c&format=json"
 
   $.ajax({
           url: queryURL,
@@ -23,7 +23,7 @@
           for (var i = 0; i < 20; i++) {
 
               var div = $("<div>").addClass("bandImg")
-              var img = $("<img>").addClass("bandClass img").attr("src", "" + response.artists.artist[i].image[2]["#text"] + "").attr("data-name", response.artists.artist[i].name).text(response.artists.artist[i].name);
+              var img = $("<img>").addClass("bandClass").attr("src", "" + response.artists.artist[i].image[2]["#text"] + "").attr("data-name", response.artists.artist[i].name).text(response.artists.artist[i].name);
               var btn = $("<button>").addClass("bandClass button").attr("data-name", response.artists.artist[i].name).text(response.artists.artist[i].name);
 
               //appends the images and buttons on every page load to their own divs--instead of placing them in divs after the fact
@@ -54,6 +54,7 @@
 
       // alert("the band is  " + bandIs)
 
+
       $(document).ready(function() {
               $("#bandInfoAppearsHere").empty();
 
@@ -73,7 +74,7 @@
 
                       for (i = 0; i < response.tracks.items.length; i++) {
                           var divTwo = $('<div>').addClass("bandInfoAppearsHere");
-                          var p = $("<p>").html('<u>' + bandIs + '</u>');
+                          var p = $("<p>").text(bandIs);
                           // $(".bandInfoAppearsHere").append(p);
                           var album = $("<p>").text("Album:   " + response.tracks.items[i].album.name);
                           // $(".bandInfoAppearsHere").append(album);
@@ -84,16 +85,16 @@
                           c.addClass("bandPlayClass");
                           // Added a data-attribute
                           c.attr("data-url", response.tracks.items[i].preview_url);
-                          c.attr("data-name", response.tracks.items[i].name);
-                          c.text(response.tracks.items[i].name);
                           // Provided the initial button text
+                          c.attr("data-name", response.tracks.items[i].name);
+
                           c.text(response.tracks.items[i].name);
                           // $(".bandInfoAppearsHere").append(c);
                           // console.log(response.tracks.items[i].preview_url)
                           divTwo.append(p);
                           divTwo.append(album);
                           divTwo.append(song);
-                          divTwo.append("Listen To A Song Clip Here: ", c);
+                          divTwo.append("Click To Listen To A Song Clip ", c);
 
                           $("#bandInfoAppearsHere").append(divTwo);
 
@@ -106,8 +107,7 @@
 
                         $('.modal').css('display', 'block');
 
-                            var songModal = $(this).data("name")
-
+                            var songModal = $(this).data("name")                   
                             var songURL = $(this).data("url")
                             
                              $("#pOne").empty();
@@ -120,6 +120,8 @@
 
                               
                                 var audio = $("<audio autoplay>").addClass("myaudio").attr(controls,"controls").attr("preload",""+ none +"").attr("src","" + songURL +"");
+                                console.log(songModal)
+                                console.log(song)
                                  $("#pOne").append(songModal);
                                  $("#pTwo").append(audio);
 
@@ -137,6 +139,8 @@
   $('span').on("click", function() {
       $('.modal').css('display', 'none');
       $(".myaudio")[0].pause();
+      // $("#pOne").empty();
+      // $("#pTwo").empty();
   })
 
   $('window').on("click", function(event) {
