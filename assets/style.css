@@ -21,7 +21,7 @@
 
    }
     .container {
-      margin: 0 5em 0 5em;
+      margin: 0 5% 0 5%;
     }
     .top {
       text-align: center;
@@ -47,13 +47,16 @@
       border-radius: 30px;
     }
     #header{
-      color: black;
+      padding-top: .41em;
+      border-bottom: solid black;
+      padding-bottom: .2em;
+      color: white;
     }
     .modal {
       display: none;
       position: fixed;
       z-index: 1;
-      padding-top: 100px;
+      padding-top: 16%; 
       left: 0;
       top: 0;
       width: 100%;
@@ -92,22 +95,28 @@
       cursor: pointer;
     }
     .modal-header {
+      font-size: xx-large;
+      font-family: 'Lato', sans-serif;
       padding: 2px 16px;
       background-color: rgb(141,194,188);
       color: white;
     }
-    .modal-body {padding: 2px 16px;}
+    .modal-body {
+      padding: 20px 16px;}
     .modal-footer {
       padding: 2px 16px;
       background-color: black;
       color:white;
     }
-    .pOne{
+    #pOne{
+      font-size: 20px;
+      padding-top: 1em;
+      padding-bottom: 1em;
       font-family: 'Lato', sans-serif;
 
     }
     .myaudio {
-      width: 390px;
+      width: 100%;
     }
 /*end modal css*/
 
@@ -149,6 +158,7 @@
      
 
     .bandImg {
+      padding-left: 19px;
       float: left;
       overflow: auto;
 /*      position: relative;
@@ -162,6 +172,9 @@
     }
 
     .bandInfoAppearsHere {
+      background-color: #8dc2bc;
+      line-height: 25px;
+      font-family: 'Lato', sans-serif;
       border: solid;
       margin-bottom: 38px;
       padding-bottom: 8px;

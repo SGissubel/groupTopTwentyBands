@@ -44,7 +44,7 @@
     $(".reload").html('<i>' + "Clear Results" + '</i>');
     $("#bandInfoAppearsHere").css("margin-left", "6%");
       $(".bandImg").css("margin", "0 1em 12em 1em");
-      $(".container").css("width", "36%").css("float", "right").css("margin", "0");
+      $(".container").css("width", "38%").css("float", "right").css("margin", "0");
 
       // $('.modal').css('display', 'block');
 
@@ -84,6 +84,8 @@
                           c.addClass("bandPlayClass");
                           // Added a data-attribute
                           c.attr("data-url", response.tracks.items[i].preview_url);
+                          c.attr("data-name", response.tracks.items[i].name);
+                          c.text(response.tracks.items[i].name);
                           // Provided the initial button text
                           c.text(response.tracks.items[i].name);
                           // $(".bandInfoAppearsHere").append(c);
@@ -104,7 +106,8 @@
 
                         $('.modal').css('display', 'block');
 
-                                               
+                            var songModal = $(this).data("name")
+
                             var songURL = $(this).data("url")
                             
                              $("#pOne").empty();
@@ -117,7 +120,7 @@
 
                               
                                 var audio = $("<audio autoplay>").addClass("myaudio").attr(controls,"controls").attr("preload",""+ none +"").attr("src","" + songURL +"");
-                                 $("#pOne").append(song);
+                                 $("#pOne").append(songModal);
                                  $("#pTwo").append(audio);
 
                                  
@@ -148,5 +151,5 @@ $(".reload").on("click", function(){
       $("#bandInfoAppearsHere").empty();
       $("#bandInfoAppearsHere").css("margin", "0");
       $(".bandImg").css("margin", "0 1em 12em 1em");
-      $(".container").css("width", "initial").css("float", "null").css("margin", "0 5em");
+      $(".container").css("width", "initial").css("float", "null").css("margin", "0 5%");
   })
