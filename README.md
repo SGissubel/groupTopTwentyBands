@@ -4,9 +4,8 @@ This current-trending music app allows a user to center their search for the bes
 
 # Application Screenshot:
 
-![alt text][logo]
+[![IMAGE ALT TEXT HERE](http://recordit.co/Jtu0EK1Gmw)
 
-[logo]: http://recordit.co/Jtu0EK1Gmw
 
 
 HTML
