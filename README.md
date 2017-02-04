@@ -8,7 +8,6 @@ This current-trending music app allows a user to center their search for the bes
 
 [logo]: http://recordit.co/Jtu0EK1Gmw
 
-# Application Screenshot:
 
 HTML
 CSS
