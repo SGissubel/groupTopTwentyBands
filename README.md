@@ -13,6 +13,10 @@ ___
 * Jquery
 * AJAX
 * API's
+___
+##APIs Used:
+* Spotify
+* radio.fm
 
 ___
 ####Collaborators:
